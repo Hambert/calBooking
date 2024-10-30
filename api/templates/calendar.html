@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fahrzeug Buchung</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Kalender Buchung</h1>
+    <a href="{{ url_for('bookings') }}" class="btn">Listenansicht</a>
+    <a href="{{ url_for('calendar_view') }}" class="btn">Kalenderansicht</a>
+
+    <form action="{{ url_for('book') }}" method="POST">
+        <label for="title">Name und Feuerwehr eintragen:</label>
+        <input type="text" name="title" required><br>
+
+        <label for="start_time">Startzeit (YYYY-MM-DDTHH:MM:SS):</label>
+        <input type="datetime-local" name="start_time" required><br>
+
+        <label for="end_time">Endzeit (YYYY-MM-DDTHH:MM:SS):</label>
+        <input type="datetime-local" name="end_time" required><br>
+
+        <button id="btnBook" type="submit">Buchen</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>

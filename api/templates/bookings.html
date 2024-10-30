@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalender Buchungen</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Gebuchte Termine</h1>
+    
+    {% if events %}
+        <table class="bookingsTable">
+            <thead>
+                <tr>
+                    <th>Titel</th>
+                    <th>Startzeit</th>
+                    <th>Endzeit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <td>{{ event['summary'] }}</td>
+                    <td>{{ event['start']['formatted'] }}</td>
+                    <td>{{ event['end']['formatted'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <caption>* es werden nur die nächsten 10 Buchungen angezeigt!</caption>
+        </table>
+    {% else %}
+        <p>Es sind keine zukünftigen Buchungen vorhanden.</p>
+    {% endif %}
+
+    <a href="{{ url_for('index') }}">Zurück zur Buchungsseite</a>
+    <a href="{{ url_for('calendar_view') }}">Kalenderansicht</a>
+</body>
+</html>

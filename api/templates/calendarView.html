@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalender</title>
+
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/main.min.css" rel="stylesheet" />
+     
+    <!-- Eigene Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Kalender</h1>
+    <!-- Div für FullCalendar -->
+    <div id="calendar"></div>
+
+    <!-- FullCalendar und Abhängigkeiten -->
+    <script src=" https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js "></script>
+    
+    <!-- jQuery (für AJAX-Anfragen, falls nötig) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'de',  // Deutsch als Sprache
+                customButtons:{
+                    custom1:{
+                        text:'Fahrzeug buchen',
+                        click: function(){
+                            window.location.href = '/';
+                        }
+                    }
+                },
+                headerToolbar: {
+                    left: 'prev,next custom1',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: '/events',  // Die Flask-Route, die die Events liefert
+                eventTimeFormat: { // Formatierung der Zeitangaben
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    meridiem: false
+                }
+            });
+
+            calendar.render();
+        });
+    </script>
+</body>
+</html>

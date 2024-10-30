@@ -62,7 +62,9 @@ def get_google_calendar_service():
 '''
 @app.route('/')
 def index():
+    print('Start')
     if not envOk:
+        print('Env error')
         return abort(500)
 
     return render_template('calendar.html')

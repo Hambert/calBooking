@@ -69,7 +69,9 @@ def index():
 
 @app.route('/test1z')
 def test():
+    print(type(SERVICE_ACCOUNT_INFO))
     y = json.loads(SERVICE_ACCOUNT_INFO)
+    print(type(y))
     return y
 
 

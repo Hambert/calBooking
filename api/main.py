@@ -22,9 +22,6 @@ app.secret_key = APP_SECRET_KEY
 # OAuth 2.0 credentials and Google Calendar API setup
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
-#SERVICE_ACCOUNT_FILE = 'api-project-643305102087-f687005d2990.json'
-#app.secret_key = 'vmHCePweH6z8g759HFjr'
-
 def get_google_calendar_service():
     '''Anmeldung über Dienstkonto'''
     service_account_info = json.loads(SERVICE_ACCOUNT_INFO)
@@ -66,14 +63,6 @@ def index():
         return abort(500)
 
     return render_template('calendar.html')
-
-@app.route('/test1z')
-def test():
-    print(type(SERVICE_ACCOUNT_INFO))
-    y = json.loads(SERVICE_ACCOUNT_INFO)
-    print(type(y))
-    return y
-
 
 @app.route('/book', methods=['POST'])
 def book():
@@ -177,4 +166,4 @@ def calendar_view():
     return render_template('calendarView.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

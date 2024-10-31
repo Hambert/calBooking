@@ -69,7 +69,8 @@ def index():
 
 @app.route('/test1z')
 def test():
-    return SERVICE_ACCOUNT_INFO
+    y = json.loads(SERVICE_ACCOUNT_INFO)
+    return y
 
 
 @app.route('/book', methods=['POST'])
